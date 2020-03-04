@@ -29,7 +29,8 @@ class CurrentDir:
 		print("cd: " + os.getcwd())
 
 if not os.path.exists("_Lumino"):
-    call("git clone --depth 1 -b v0.9.0 https://github.com/LuminoEngine/Lumino.git _Lumino")
+    #call("git clone --depth 1 -b v0.9.0 https://github.com/LuminoEngine/Lumino.git _Lumino")
+    call("git clone https://github.com/LuminoEngine/Lumino.git _Lumino")
     
 with CurrentDir('_Lumino/docs/Doxygen'):
     call("build_doc.bat")
