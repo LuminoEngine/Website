@@ -4,6 +4,8 @@
 import shutil
 import os
 
+print("clearn _docs_repo...")
+
 def safe_rmtree(path):
     if os.path.isdir(path):
         shutil.rmtree(path)

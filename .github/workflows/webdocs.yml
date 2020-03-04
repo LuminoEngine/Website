@@ -5,9 +5,14 @@ on:
     branches:
     - master
 
+env:
+  LN_BUILD_FROM_CI: 1
+
 jobs:
   build:
-    runs-on: windows-latest
+    # Lumino clone fails on windows, so I chose unbuntu.
+    # Cause unknown...
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -22,18 +27,28 @@ jobs:
       with:
         ruby-version: 2.6.x
 
+    # Since docfx-action is executed as root, create a directory as a normal user first
+    - name: Prepare
+      run: |
+        git clone https://${CI_PUSH_TOKEN}@github.com/LuminoEngine/LuminoEngine.github.io.git _site
+        mkdir _site/api
+
+    - name: Build docfx
+      uses: nikeee/docfx-action@master
+      with:
+        args: docfx.json
+
     - name: Deploy
       env:
         CI_PUSH_TOKEN: ${{ secrets.CI_PUSH_TOKEN }}
       run: |
-        choco install -y docfx
-        choco install -y doxygen.install
-        git clone https://lriki:${CI_PUSH_TOKEN}@github.com/LuminoEngine/LuminoEngine.github.io.git _docs_repo
+        sudo apt-get update
+        sudo apt-get install doxygen graphviz
+        gem install yard
         python clearn_deploy_target.py
         python build.py
-        cp -rf _site _docs_repo
-        cd _docs_repo
-        git config user.name "LuminoEngine"
+        cd _site
+        git config user.name "LuminoEngine CI"
         git config user.email "LuminoEngine@users.noreply.github.com"
         git config core.autoCRLF false
         git add .
