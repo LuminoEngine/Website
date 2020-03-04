@@ -48,7 +48,8 @@ jobs:
         python clearn_deploy_target.py
         python build.py
         cd _site
-        git config user.name "LuminoEngine CI"
+        ls -la
+        git config user.name "LuminoEngine"
         git config user.email "LuminoEngine@users.noreply.github.com"
         git config core.autoCRLF false
         git add .
