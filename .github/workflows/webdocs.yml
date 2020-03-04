@@ -1,0 +1,56 @@
+name: WebDocument
+
+on:
+  push:
+    branches:
+    - master
+
+env:
+  LN_BUILD_FROM_CI: 1
+  CI_PUSH_TOKEN: ${{ secrets.CI_PUSH_TOKEN }}
+
+jobs:
+  build:
+    # Lumino clone fails on windows, so I chose unbuntu.
+    # Cause unknown...
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+
+    # Since docfx-action is executed as root, create a directory as a normal user first
+    - name: Prepare
+      run: |
+        git clone https://${CI_PUSH_TOKEN}@github.com/LuminoEngine/LuminoEngine.github.io.git _site
+        mkdir _site/api
+
+    - name: Build docfx
+      uses: nikeee/docfx-action@master
+      with:
+        args: docfx.json
+
+    - name: Deploy
+      run: |
+        sudo apt-get update
+        sudo apt-get install doxygen graphviz
+        gem install yard
+        python clearn_deploy_target.py
+        python build.py
+        cd _site
+        ls -la
+        git config user.name "LuminoEngine"
+        git config user.email "LuminoEngine@users.noreply.github.com"
+        git config core.autoCRLF false
+        git add .
+        git commit -m '[CI] Deploy to GitHub Pages'
+        git push origin master
