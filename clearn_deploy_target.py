@@ -4,17 +4,25 @@
 import shutil
 import os
 
-shutil.rmtree("_docs_repo/api")
-shutil.rmtree("_docs_repo/articles")
-shutil.rmtree("_docs_repo/fonts")
-shutil.rmtree("_docs_repo/img")
-shutil.rmtree("_docs_repo/styles")
-os.remove("logo.svg")
-os.remove("manifest.json")
-os.remove("Readme.html")
-os.remove("search-stopwords.json")
-os.remove("toc.html")
-os.remove("xrefmap.yml")
-os.remove("favicon.ico")
-os.remove("index.html")
-os.remove("logo.png")
+def safe_rmtree(path):
+    if os.path.isdir(path):
+        shutil.rmtree(path)
+
+def safe_rmfile(path):
+    if os.path.isfile(path):
+        os.remove(path)
+
+safe_rmtree("_docs_repo/api")
+safe_rmtree("_docs_repo/articles")
+safe_rmtree("_docs_repo/fonts")
+safe_rmtree("_docs_repo/img")
+safe_rmtree("_docs_repo/styles")
+safe_rmfile("_docs_repo/logo.svg")
+safe_rmfile("_docs_repo/manifest.json")
+safe_rmfile("_docs_repo/Readme.html")
+safe_rmfile("_docs_repo/search-stopwords.json")
+safe_rmfile("_docs_repo/toc.html")
+safe_rmfile("_docs_repo/xrefmap.yml")
+safe_rmfile("_docs_repo/favicon.ico")
+safe_rmfile("_docs_repo/index.html")
+safe_rmfile("_docs_repo/logo.png")
