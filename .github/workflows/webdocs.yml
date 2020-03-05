@@ -32,7 +32,6 @@ jobs:
     - name: Prepare
       run: |
         git clone https://${CI_PUSH_TOKEN}@github.com/LuminoEngine/LuminoEngine.github.io.git _site
-        mkdir _site/api
 
     - name: Build docfx
       uses: nikeee/docfx-action@master
