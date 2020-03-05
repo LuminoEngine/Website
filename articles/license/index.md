@@ -11,6 +11,3 @@ Lumino 及びサードパーティライブラリのライセンスは次のフ�
 - [License](https://github.com/LuminoEngine/Lumino/blob/master/LICENSE)
 - [ThirdPartyLicense](https://github.com/LuminoEngine/Lumino/blob/master/External/ThirdPartyLicense)
 
-Lumino を利用したソフトウェアを配布する場合、このファイルの内容を配布物に含めるようにしてください。
-
-
