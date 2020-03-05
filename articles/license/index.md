@@ -9,5 +9,5 @@ Lumino が使用するサードパーティライブラリにはそれぞれの�
 Lumino 及びサードパーティライブラリのライセンスは次のファイルを参照してください。
 
 - [License](https://github.com/LuminoEngine/Lumino/blob/master/LICENSE)
-- [ThirdPartyLicense](https://github.com/LuminoEngine/Lumino/blob/master/External/ThirdPartyLicense)
+- [ThirdPartyLicense](https://github.com/LuminoEngine/Lumino/blob/master/external/ThirdPartyLicense)
 
