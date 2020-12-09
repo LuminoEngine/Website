@@ -3,7 +3,7 @@ Lumino の基本
 
 この章では、Lumino を使ってアプリケーションを作成するための最も基本的な流れについて学びます。
 
-最小のプログラム
+基本的なプログラムの構造
 ----------
 
 「最初のプログラム」で見たように、Lumino でアプリを開発するには Application クラスの実装から始めます。
@@ -15,11 +15,32 @@ Lumino の基本
 ```cpp
 #include <Lumino.hpp>
 
-class App : public Application
+void Main()
 {
-};
+    // Lumino を初期化します。
+    Engine::init();
 
-LUMINO_APP(App);
+    // メインループ。
+    while (Engine::update())
+    {
+        // ここに処理を書きます。
+    }
+}
+```
+
+# [HSP3](#tab/lang-hsp3)
+
+```hsp
+#include "lumino.as"
+
+// Lumino を初期化します
+LNEngine_Init
+
+// メインループ
+repeat
+    LNEngine_Update
+    // ここに処理を書きます。
+loop
 ```
 
 # [Ruby](#tab/lang-ruby)
@@ -27,78 +48,56 @@ LUMINO_APP(App);
 ```ruby
 require "lumino"
 
-class App < Application
-end
+# Lumino を初期化します。
+Engine.init
 
-App.new.run
+# メインループ。
+while Engine.update do
+    # ここに処理を書きます。
+end
 ```
 
----
+----------------------------------------
 
-実行して、ウィンドウを表示してみましょう。
+### 初期化
 
-![](img/basic-1.png)
+プログラムがスタートした後、Lumino の機能を使う前に、必ず初期化用の処理を呼び出す必要があります。
 
-この時点でできることは、クローズボタンなどでウィンドウを閉じるだけです。
+この中でウィンドウの作成やグラフィックスの初期化処理が行われ、すぐにゲームの処理を書き始められるようになります。
 
-文字を表示したり、ユーザー入力を受けてインタラクションを実現するためにはこの App クラスにいくつかのメソッドを実装する必要があります。
+### メインループ
 
+リアルタイムで動くゲームを作るためには **メインループ** を実装する必要があります。
 
-初期化と更新
-----------
+メインループはその言葉通り、ユーザー操作によってウィンドウが閉じられたりするまで継続的に処理を繰り返し、通常は次の処理を行います。
 
-小さな Lumino アプリケーションを作成するための基本的なタスクは次の2つです。
+- プレイヤーからの入力を確認する。
+- ゲーム状態 (キャラクターの位置など) を進めます。
+- それをもとに、グラフィックを表示します。
 
-- プログラムの開始時に変数を初期化する
-- プログラムが動き出したら、繰り返し変数を変更する
-
-これらを行うために、次のように 2 つのメソッド定義を追加します。
+> [!Note]
+> このループ 1 回分の実行単位を `フレーム` と呼びます。（「1 秒間は 60 フレーム」といったように使います）
 
 # [C++](#tab/lang-cpp)
 
-```cpp
-#include <Lumino.hpp>
+`Engine::update()` は画面の表示や音楽・入力デバイスの情報を更新します。
+さらにメインループが 1 秒間に 60 回の周期で実行され続けるように、必要に応じて待機時間の調整を行います。
 
-class App : public Application
-{
-    void onInit() override
-    {
-    }
-
-    void onUpdate() override
-    {
-    }
-};
-
-LUMINO_APP(App);
-```
+また通常は true を返しますが、ウィンドウが閉じられる等アプリケーションを終了するべきイベントが発生すると、false を返すようになります。
 
 # [Ruby](#tab/lang-ruby)
 
-```ruby
-require "lumino"
+`Engine.update` は画面の表示や音楽・入力デバイスの情報を更新します。
+さらにメインループが 1 秒間に 60 回の周期で実行され続けるように、必要に応じて待機時間の調整を行います。
 
-class App < Application
-  def on_init
-  end
+また通常は true を返しますが、ウィンドウが閉じられる等アプリケーションを終了するべきイベントが発生すると、false を返すようになります。
 
-  def on_update
-  end
-end
+# [HSP3](#tab/lang-hsp3)
 
-App.new.run
-```
+`LNEngine_Update` は画面の表示や音楽・入力デバイスの情報を更新します。
+さらにメインループが 1 秒間に 60 回の周期で実行され続けるように、必要に応じて待機時間の調整を行います。
 
----
-
-空のメソッドを追加しただけなので、実行するとウィンドウは表示できますが、動きは変わりません。
-
-この後のチュートリアルやサンプルで紹介するプログラムでは、プログラムの開始時に1回呼び出される onInit() メソッドで変数を初期化し、onUpdate() メソッドでこれらの変数を変更して、アプリケーションを実装していくことになります。
-
-> [!Note]
-> onUpdate() は 1秒間に 60 回、繰り返し実行されます。
-> この 1 回分の実行単位を `フレーム` と呼び、「1 秒間は 60 フレーム」といったように使います。
-
+----------
 
 Hello, Lumino!
 ----------
@@ -144,7 +143,21 @@ end
 App.new.run
 ```
 
----
+# [HSP](#tab/lang-hsp3)
+
+```hsp
+#include "lumino.as"
+
+LNEngine_Init
+
+LNDebug_Print "Hello, Lumino!"
+
+repeat
+	LNEngine_Update
+loop
+```
+
+----------
 
 文字列がウィンドウ上に表示されます。（その後、しばらくすると消えます）
 
@@ -189,7 +202,22 @@ end
 
 App.new.run
 ```
----
+
+# [HSP](#tab/lang-hsp3)
+```hsp
+#include "lumino.as"
+
+LNEngine_Init
+
+repeat
+	LNEngine_Update
+
+	LNEngine_GetTime time
+	LNDebug_Print "Time: " + time
+loop
+```
+
+----------
 
 `Engine::time()` は アプリケーションの起動からの経過時間を返します。これを利用して、onUpdate() がどのくらいの頻度で実行されているのかを確認してみます。
 
@@ -234,7 +262,21 @@ end
 
 App.new.run
 ```
----
+
+# [HSP](#tab/lang-hsp3)
+```hsp
+#include "lumino.as"
+
+LNEngine_Init
+
+repeat
+	LNEngine_Update
+
+	LNEngine_GetTime time
+	LNDebug_PrintWithTime 0, "Time: " + time
+loop
+```
+----------
 
 修正したら、実行してみましょう。
 

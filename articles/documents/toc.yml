@@ -8,6 +8,8 @@
         href: getting-started/getting-started-native.md
       - name: Ruby
         href: getting-started/getting-started-ruby.md
+      - name: HSP3
+        href: getting-started/getting-started-hsp3.md
     - name: 動作環境
       href: getting-started/requirements.md
     - name: ダウンロード

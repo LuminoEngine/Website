@@ -16,3 +16,7 @@ Lumino は複数のプログラミング言語で利用することができま�
 <i class="glyphicon glyphicon-circle-arrow-right"></i>Ruby
 ](getting-started-ruby.md)
 
+[
+<i class="glyphicon glyphicon-circle-arrow-right"></i>HSP3
+](getting-started-hsp3.md)
+
