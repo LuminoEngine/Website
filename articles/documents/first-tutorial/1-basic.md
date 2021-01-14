@@ -11,21 +11,33 @@ Lumino の基本
 空のウィンドウを表示するだけの最小限のプログラムは、次のようになります。
 
 # [C++](#tab/lang-cpp)
-
 ```cpp
 #include <Lumino.hpp>
 
 void Main()
 {
-    // Lumino を初期化します。
+    // Lumino を初期化します
     Engine::init();
 
-    // メインループ。
+    // メインループ
     while (Engine::update())
     {
-        // ここに処理を書きます。
+        // ここに処理を書きます
     }
 }
+```
+
+# [Ruby](#tab/lang-ruby)
+```ruby
+require "lumino"
+
+# Lumino を初期化します
+Engine.init
+
+# メインループ
+while Engine.update do
+    # ここに処理を書きます
+end
 ```
 
 # [HSP3](#tab/lang-hsp3)
@@ -39,22 +51,8 @@ LNEngine_Init
 // メインループ
 repeat
     LNEngine_Update
-    // ここに処理を書きます。
+    // ここに処理を書きます
 loop
-```
-
-# [Ruby](#tab/lang-ruby)
-
-```ruby
-require "lumino"
-
-# Lumino を初期化します。
-Engine.init
-
-# メインループ。
-while Engine.update do
-    # ここに処理を書きます。
-end
 ```
 
 ----------------------------------------
@@ -69,7 +67,8 @@ end
 
 リアルタイムで動くゲームを作るためには **メインループ** を実装する必要があります。
 
-メインループはその言葉通り、ユーザー操作によってウィンドウが閉じられたりするまで継続的に処理を繰り返し、通常は次の処理を行います。
+メインループはアプリケーションの起動中に実行され続ける処理ブロックです。
+ユーザー操作によってウィンドウが閉じられたりするまで繰り返し、通常は次のような処理を行います。
 
 - プレイヤーからの入力を確認する。
 - ゲーム状態 (キャラクターの位置など) を進めます。
@@ -104,26 +103,24 @@ Hello, Lumino!
 
 ウィンドウに文字列を表示してみましょう。
 
-テキストや数値を画面に表示するには、Lumino の デバッグようの機能である、Debug クラスの print() メソッドを使うと簡単にできます。
+テキストや数値を画面に表示するには、デバッグ用の文字列表示機能を使うと簡単にできます。
 
 # [C++](#tab/lang-cpp)
 
 ```cpp
 #include <Lumino.hpp>
 
-class App : public Application
+void Main()
 {
-    void onInit() override
-    {
-        Debug::print(u"Hello, Lumino!");
-    }
+    Engine::init();
 
-    void onUpdate() override
-    {
-    }
-};
+    // LNDebug_Print で画面上に一時的な文字列を表示します
+    Debug::print(u"Hello, Lumino!");
 
-LUMINO_APP(App);
+    while (Engine::update()) {
+
+    }
+}
 ```
 
 # [Ruby](#tab/lang-ruby)
@@ -131,16 +128,13 @@ LUMINO_APP(App);
 ```ruby
 require "lumino"
 
-class App < Application
-  def on_init
-    Debug.print("Hello, Lumino!")
-  end
+Engine.init
 
-  def on_update
-  end
+Debug.print("Hello, Lumino!")
+
+while Engine.update do
+
 end
-
-App.new.run
 ```
 
 # [HSP](#tab/lang-hsp3)
@@ -150,6 +144,7 @@ App.new.run
 
 LNEngine_Init
 
+// LNDebug_Print で画面上に一時的な文字列を表示します
 LNDebug_Print "Hello, Lumino!"
 
 repeat
@@ -159,7 +154,7 @@ loop
 
 ----------
 
-文字列がウィンドウ上に表示されます。（その後、しばらくすると消えます）
+実行すると、文字列がウィンドウ上に表示されます。（その後、しばらくすると消えます）
 
 ![](img/basic-2.png)
 
@@ -173,34 +168,26 @@ loop
 ```cpp
 #include <Lumino.hpp>
 
-class App : public Application
+void Main()
 {
-    void onInit() override
-    {
-    }
+    Engine::init();
 
-    void onUpdate() override
-    {
+    while (Engine::update()) {
         Debug::print(String::format(u"Time: {0}", Engine::time()));
     }
-};
-
-LUMINO_APP(App);
+}
 ```
 # [Ruby](#tab/lang-ruby)
 ```ruby
 require "lumino"
 
-class App < Application
-  def on_init
-  end
+Engine.init
 
-  def on_update
-    Debug.print("Time: %f" % Engine.time)
-  end
+Debug.print("Time: %f" % Engine.time)
+
+while Engine.update do
+
 end
-
-App.new.run
 ```
 
 # [HSP](#tab/lang-hsp3)
@@ -233,34 +220,25 @@ loop
 ```cpp
 #include <Lumino.hpp>
 
-class App : public Application
+void Main()
 {
-    void onInit() override
-    {
-    }
+    Engine::init();
 
-    void onUpdate() override
+    while (Engine::update())
     {
         Debug::print(0, String::format(u"Time: {0}", Engine::time()));
     }
-};
-
-LUMINO_APP(App);
+}
 ```
 # [Ruby](#tab/lang-ruby)
 ```ruby
 require "lumino"
 
-class App < Application
-  def on_init
-  end
+Engine.init
 
-  def on_update
+while Engine.update do
     Debug.print(0, "Time: %f" % Engine.time)
-  end
 end
-
-App.new.run
 ```
 
 # [HSP](#tab/lang-hsp3)
@@ -270,10 +248,10 @@ App.new.run
 LNEngine_Init
 
 repeat
-	LNEngine_Update
+    LNEngine_Update
 
-	LNEngine_GetTime time
-	LNDebug_PrintWithTime 0, "Time: " + time
+    LNEngine_GetTime time
+    LNDebug_PrintWithTime 0, "Time: " + time
 loop
 ```
 ----------
