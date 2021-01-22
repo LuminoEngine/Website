@@ -20,49 +20,19 @@ C++ で Lumino をはじめる
 2. 実行時に Windows SmartScreen の注意メッセージが表示された場合は「詳細情報」→「実行」を押してください。
 
 
-プロジェクトを作成する
---------
-ターミナル（コマンドプロンプト）を開いて次のコマンドを入力します。
-
-```sh
-lumino new hello
-```
-
-カレントディレクトリの下に `hello` というフォルダが作成され、その中に必要なファイルが作成されます。
-
-プロジェクトを実行する
+プロジェクトを作成して実行する
 --------
 
-`hello` フォルダの中には Visual Studio のソリューションファイル(.sln) が作成されています。
+1. Visual Studio 2019 を起動し、 [新しいプロジェクトの作成] をクリックします。 ![](img/getting-started-native-1.png)
+2. プロジェクト テンプレートのリストから `LuminoProject` を選択し、 [次へ] をクリックします。 ![](img/getting-started-native-2.png)
+3. プロジェクト名と保存場所を入力し（任意）、[作成] をクリックします。 ![](img/getting-started-native-3.png)
+4. プロジェクトが作成され、サンプルプログラムが表示されます。
+5. [デバッグ] メニューの [デバッグの開始] からからプログラムを実行します。
 
-このファイルを Visual Studio で開くことで、Visual Studio 上で開発することができます。
-
-プロジェクトの中に作成されている `src/App.cpp` が Lumino のエントリーポイントです。ここには次のようなプログラムが書かれています。
-
-```cpp
-#include <Lumino.hpp>
-
-class HelloApp : public Application
-{
-    void onStart() override
-    {
-        auto text = UITextBlock::create(u"Hello, Lumino!");
-    }
-
-    void onUpdate() override
-    {
-    }
-};
-
-LUMINO_APP(HelloApp);
-```
-
-プログラムの実行は、[デバッグ] メニューの [デバッグの開始] から行います。
 
 ![](img/first-program.png)
 
 中央に "Hello, Lumino!" と書かれたウィンドウが表示されましたか？
 
 これで Lumino を使うための準備が整いました。次は [チュートリアル](../first-tutorial/1-basic.md) に進みましょう！
-
 

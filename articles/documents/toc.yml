@@ -8,6 +8,8 @@
         href: getting-started/getting-started-native.md
       - name: Ruby
         href: getting-started/getting-started-ruby.md
+      - name: HSP3
+        href: getting-started/getting-started-hsp3.md
     - name: 動作環境
       href: getting-started/requirements.md
     - name: ダウンロード
@@ -21,9 +23,9 @@
     href: first-tutorial/2-graphics-basic.md
   - name: 3. オブジェクトを動かす
     href: first-tutorial/3-object.md
-  - name: 4. 図形を描画する
+  - name: 4. 図形を表示する
     href: first-tutorial/4-shapes.md
-  - name: 5. 画像を描画する
+  - name: 5. 画像を表示する
     href: first-tutorial/5-image.md
   - name: 6. 描画設定を変更する (TBD)
     href: first-tutorial/6-render-settings.md

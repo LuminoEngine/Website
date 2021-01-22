@@ -42,6 +42,20 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    return
+
+*on_update
+    LNDebug_PrintWithTime 0, strf("X: %d", mousex)
+    LNDebug_PrintWithTime 0, strf("Y: %d", mousey)
+    return
+```
 ---
 
 ![](img/2-coordinate-2.gif)
@@ -123,6 +137,23 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    LNBoxMesh_Create box
+
+    LNEngine_GetWorld world
+    LNWorld_Add world, box
+    
+    return
+
+*on_update
+    return
+```
 ---
 
 ![](img/graphics-basic-4.png)
@@ -179,6 +210,27 @@ class App < Application
 end
 
 App.new.run
+```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    LNBoxMesh_Create box
+
+    LNEngine_GetWorld world
+    LNWorld_Add world, box
+
+    LNEngine_GetCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+    
+    return
+
+*on_update
+    return
 ```
 ---
 
@@ -272,6 +324,35 @@ App.new.run
 2. レイと平面との衝突判定を行います。 `intersect_plane()` の引数は面の表方向を表す x, y, z 値です。ここでは、Y+ 方向 （真上）を向く、つまるところ通常の `地平面` を指定しています。衝突した場合、結果を返します。衝突しなければ nullptr で、if 内には入りません。
 3. `result.point` で衝突した点を取得できます、これをカメラの時と同じようして `@box.set_position()` にセットすることで、Box を移動させます。
 
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    LNBoxMesh_Create box
+
+    LNEngine_GetWorld world
+    LNWorld_Add world, box
+
+    LNEngine_GetCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+    
+    return
+
+*on_update
+    LNMouse_GetPosition p
+    LNRaycaster_FromScreen p, raycaster
+    LNRaycaster_IntersectPlane raycaster, 0, 1, 0, result
+    if result {
+        LNRaycastResult_GetPoint result, p
+        LNWorldObject_SetPosition box, p
+    }
+
+    return
+```
 ----------
 
 ![](img/graphics-basic-9.gif)
@@ -346,6 +427,41 @@ on_init の先頭に2行の新しいコードが増えています。
 - `Engine.render_view.guide_grid_enabled = true` は、ワールド全体の地平面にグリッドを表示します。また、原点から各軸方向を示す赤、緑、青の線分を表示します。
 - `Engine.camera.add_component(CameraOrbitControlComponent.new)` は、これまで使ってきたカメラに対して、マウスを使って操作できる機能を追加します。
 
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    LNEngine_GetRenderView render_view
+    LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
+    LNEngine_GetCamera camera
+    LNCameraOrbitControlComponent_Create orbit_control
+    LNWorldObject_AddComponent camera, orbit_control
+
+    LNBoxMesh_Create box
+
+    LNEngine_GetWorld world
+    LNWorld_Add world, box
+
+    LNEngine_GetCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+    
+    return
+
+*on_update
+    LNMouse_GetPosition p
+    LNRaycaster_FromScreen p, raycaster
+    LNRaycaster_IntersectPlane raycaster, 0, 1, 0, result
+    if result {
+        LNRaycastResult_GetPoint result, p
+        LNWorldObject_SetPosition box, p
+    }
+
+    return
+```
 ----------
 
 マウス操作は次の通りです。
