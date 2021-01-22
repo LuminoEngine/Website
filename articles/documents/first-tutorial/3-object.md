@@ -20,13 +20,13 @@ class App : public Application
         Engine::camera()->setPosition(5, 5, -5);
         Engine::camera()->lookAt(0, 0, 0);
 
-        auto box1 = BoxMesh::create();
+        auto box1 = BoxMesh::With().buildInto();
         box1->setPosition(1, 0, 0);
-
-        auto box2 = BoxMesh::create();
+            
+        auto box2 = BoxMesh::With().buildInto();
         box2->setPosition(0, 2, 0);
 
-        auto box3 = BoxMesh::create();
+        auto box3 = BoxMesh::With().buildInto();
         box3->setPosition(0, 0, 3);
     }
 };
@@ -44,12 +44,15 @@ class App < Application
     Engine.camera.look_at(0, 0, 0)
     
     box1 = BoxMesh.new
+    box1.add_into
     box1.set_position(1, 0, 0)
 
     box2 = BoxMesh.new
+    box2.add_into
     box2.set_position(0, 2, 0)
 
     box3 = BoxMesh.new
+    box3.add_into
     box3.set_position(0, 0, 3)
   end
 end
@@ -78,7 +81,7 @@ class App : public Application
         Engine::camera()->setPosition(5, 5, -5);
         Engine::camera()->lookAt(0, 0, 0);
 
-        box = BoxMesh::create();
+        box = BoxMesh::With().buildInto();
     }
 
     void onUpdate() override
@@ -104,6 +107,7 @@ class App < Application
     Engine.camera.look_at(0, 0, 0)
     
     @box = BoxMesh.new
+    @box.add_into
   end
   
   def on_update
@@ -140,7 +144,7 @@ class App : public Application
         Engine::camera()->setPosition(5, 5, -5);
         Engine::camera()->lookAt(0, 0, 0);
 
-        box = BoxMesh::create();
+        box = BoxMesh::With().buildInto();
     }
 
     void onUpdate() override
@@ -166,6 +170,7 @@ class App < Application
     Engine.camera.look_at(0, 0, 0)
     
     @box = BoxMesh.new
+    @box.add_into
   end
   
   def on_update

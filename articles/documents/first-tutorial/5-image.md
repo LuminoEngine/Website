@@ -23,7 +23,7 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::load(u"picture1.jpg");
-        auto sprite = Sprite::create(texture);
+        auto sprite = Sprite::With(texture).buildInto();
     }
 };
 
@@ -83,8 +83,9 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::load(u"picture1.jpg");
-        auto sprite = Sprite::create(texture);
-        sprite->setSize(3, 3);
+        auto sprite = Sprite::With(texture)
+            .size(3, 3)
+            .buildInto();
     }
 };
 
@@ -99,6 +100,7 @@ class App < Application
     texture = Texture2D.load("picture1.jpg")
     sprite = Sprite.new(texture)
     sprite.set_size(3, 3)
+    sprite.add_into
   end
 end
 
@@ -124,7 +126,7 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::loadEmoji(u"🌱");
-        auto sprite = Sprite::create(texture);
+        auto sprite = Sprite::With(texture).buildInto();
     }
 };
 
@@ -138,6 +140,7 @@ class App < Application
   def on_init
     texture = Texture2D.load_emoji("🌱")
     sprite = Sprite.new(texture)
+    sprite.add_into
   end
 end
 

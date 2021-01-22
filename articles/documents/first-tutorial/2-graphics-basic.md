@@ -20,7 +20,7 @@
 
 class App : public Application
 {
-    virtual void onUpdate() override
+    void onUpdate() override
     {
         Debug::print(0, String::format(u"X: {0}", Mouse::position().x));
         Debug::print(0, String::format(u"Y: {0}", Mouse::position().y));
@@ -119,7 +119,9 @@ class App : public Application
 {
     void onInit() override
     {
-        auto box = BoxMesh::create();
+        auto box = BoxMesh::With()
+            .size(1, 1, 1)  // 横幅、縦幅、奥行 をそれぞれ 1 とする
+            .buildInto();   // オブジェクトを作成し、デフォルトのワールドへ追加する
     }
 };
 
@@ -131,8 +133,8 @@ require "lumino"
 
 class App < Application
     def on_init
-        box = BoxMesh.new
-    end
+        box = BoxMesh.new(1, 1, 1)  # 横幅、縦幅、奥行 をそれぞれ 1 とする
+        box.add_into                # デフォルトのワールドへ追加する
 end
 
 App.new.run
@@ -144,11 +146,12 @@ App.new.run
 LUMINO_APP
 
 *on_init
-    LNBoxMesh_Create box
+    // 横幅、縦幅、奥行 をそれぞれ 1 とする。作成されたオブジェクトのハンドルが box へ代入される
+    LNBoxMesh_CreateWithSize 1, 1, 1, box
 
-    LNEngine_GetWorld world
-    LNWorld_Add world, box
-    
+    // デフォルトのワールドへ追加する
+    LNWorldObject_AddInto box
+
     return
 
 *on_update
@@ -184,7 +187,9 @@ class App : public Application
 {
     void onInit() override
     {
-        auto box = BoxMesh::create();
+        auto box = BoxMesh::With()
+            .size(1, 1, 1)
+            .buildInto();
 
         auto camera = Engine::camera();
         camera->setPosition(5, 5, -5);
@@ -212,16 +217,15 @@ end
 App.new.run
 ```
 # [HSP3](#tab/lang-hsp3)
+デフォルトのカメラは `LNEngine_GetCamera` で取得し、`LNWorldObject_SetPositionXYZ` で 3D 位置を指定します。また、位置を指定した後に `LNWorldObject_LookAtXYZ` でワールドの原点を向くようにします。
 ```c
 #include "lumino.as"
 
 LUMINO_APP
 
 *on_init
-    LNBoxMesh_Create box
-
-    LNEngine_GetWorld world
-    LNWorld_Add world, box
+    LNBoxMesh_CreateWithSize 1, 1, 1, box
+    LNWorldObject_AddInto box
 
     LNEngine_GetCamera camera
     LNWorldObject_SetPositionXYZ camera, 5, 5, -5
@@ -321,7 +325,7 @@ end
 App.new.run
 ```
 1. スクリーン上の現在のマウス位置 `Mouse.position` を起点としてレイキャスティングを行う `Raycaster` インスタンスを取得します。
-2. レイと平面との衝突判定を行います。 `intersect_plane()` の引数は面の表方向を表す x, y, z 値です。ここでは、Y+ 方向 （真上）を向く、つまるところ通常の `地平面` を指定しています。衝突した場合、結果を返します。衝突しなければ nullptr で、if 内には入りません。
+2. レイと平面との衝突判定を行います。 `intersect_plane()` の引数は面の表方向を表す x, y, z 値です。ここでは、Y+ 方向 （真上）を向く、つまるところ通常の `地平面` を指定しています。衝突した場合、結果を返します。衝突しなければ null で、if 内には入りません。
 3. `result.point` で衝突した点を取得できます、これをカメラの時と同じようして `@box.set_position()` にセットすることで、Box を移動させます。
 
 # [HSP3](#tab/lang-hsp3)
@@ -331,10 +335,8 @@ App.new.run
 LUMINO_APP
 
 *on_init
-    LNBoxMesh_Create box
-
-    LNEngine_GetWorld world
-    LNWorld_Add world, box
+    LNBoxMesh_CreateWithSize 1, 1, 1, box
+    LNWorldObject_AddInto box
 
     LNEngine_GetCamera camera
     LNWorldObject_SetPositionXYZ camera, 5, 5, -5
@@ -344,15 +346,19 @@ LUMINO_APP
 
 *on_update
     LNMouse_GetPosition p
-    LNRaycaster_FromScreen p, raycaster
-    LNRaycaster_IntersectPlane raycaster, 0, 1, 0, result
-    if result {
-        LNRaycastResult_GetPoint result, p
+    LNRaycaster_FromScreen p, raycaster   // (1)
+    LNRaycaster_IntersectPlane raycaster, 0, 1, 0, result   // (2)
+    if result != LN_NULL_HANDLE {
+        LNRaycastResult_GetPoint result, p   // (3)
         LNWorldObject_SetPosition box, p
     }
 
     return
 ```
+1. スクリーン上の現在のマウス位置を起点としてレイキャスティングを行う `Raycaster` を作成し、ハンドルを raycaster に代入します。
+2. レイと平面との衝突判定を行います。 `LNRaycaster_IntersectPlane` の引数 (0, 1, 0) は面の表方向を表す x, y, z 値です。ここでは、Y+ 方向 （真上）を向く、つまるところ通常の `地平面` を指定しています。衝突した場合、結果を返します。衝突しなければ LN_NULL_HANDLE が代入され、if 内には入りません。
+3. `LNRaycastResult_GetPoint` で衝突した点を取得できます、これを `LNWorldObject_SetPosition` にセットすることで、Box を移動させます。
+
 ----------
 
 ![](img/graphics-basic-9.gif)
@@ -434,6 +440,7 @@ on_init の先頭に2行の新しいコードが増えています。
 LUMINO_APP
 
 *on_init
+    // 追加部分
     LNEngine_GetRenderView render_view
     LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
     LNEngine_GetCamera camera

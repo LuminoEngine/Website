@@ -25,7 +25,7 @@ C++ で Lumino をはじめる
 
 1. Visual Studio 2019 を起動し、 [新しいプロジェクトの作成] をクリックします。 ![](img/getting-started-native-1.png)
 2. プロジェクト テンプレートのリストから `LuminoProject` を選択し、 [次へ] をクリックします。 ![](img/getting-started-native-2.png)
-3. プロジェクト名と保存場所を入力し（任意）、[作成] をクリックします。 ![](img/getting-started-native-3.png)
+3. プロジェクト名と保存場所を入力し、[作成] をクリックします。 ![](img/getting-started-native-3.png)
 4. プロジェクトが作成され、サンプルプログラムが表示されます。
 5. [デバッグ] メニューの [デバッグの開始] からからプログラムを実行します。
 
