@@ -20,6 +20,7 @@ class App : public Application
     {
         auto texture = Texture2D::load(u"picture1.jpg");
         auto sprite = UISprite::create(texture);
+        sprite->addInto();
     }
 };
 
@@ -80,8 +81,9 @@ class App : public Application
     {
         auto texture = Texture2D::load(u"picture1.jpg");
         auto sprite = UISprite::create(texture);
-        sprite->setAlignments(HAlignment::Left, VAlignment::Top);
+        sprite->setAlignments(UIHAlignment::Left, UIVAlignment::Top);
         sprite->setPosition(100, 50);
+        sprite->addInto();
     }
 };
 
@@ -126,6 +128,7 @@ class App : public Application
         button->connectOnClicked([]() {
             Debug::printf(u"Hello, UI!");
         });
+        button->addInto();
     }
 };
 

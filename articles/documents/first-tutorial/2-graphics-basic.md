@@ -273,7 +273,7 @@ class App : public Application
 
     void onInit() override
     {
-        box = BoxMesh::create();
+        box = BoxMesh::With().buildInto();
 
         auto camera = Engine::camera();
         camera->setPosition(5, 5, -5);
@@ -388,7 +388,7 @@ class App : public Application
         Engine::renderView()->setGuideGridEnabled(true);
         Engine::camera()->addComponent(CameraOrbitControlComponent::create());
 
-        box = BoxMesh::create();
+        box = BoxMesh::With().buildInto();
     }
 
     void onUpdate() override

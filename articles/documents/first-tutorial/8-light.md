@@ -22,13 +22,13 @@ class App : public Application
 {
     void onInit() override
     {
-        auto box = BoxMesh::create();
+        auto box = BoxMesh::With().buildInto();
 
         auto camera = Engine::camera();
         camera->setPosition(5, 5, -5);
         camera->lookAt(0, 0, 0);
 
-        auto light = Engine::light();
+        auto light = Engine::mainLight();
         light->lookAt(0, -1, 0);
     }
 };

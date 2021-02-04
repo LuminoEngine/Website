@@ -22,29 +22,29 @@ class App : public Application
 
     void onInit() override
     {
-        box = BoxMesh::create();
+        box = BoxMesh::With().buildInto();
     }
 
     void onUpdate() override
     {
-        if (Input::pressed(u"left")) {
+        if (Input::isPressed(u"left")) {
             posX -= 0.1;
         }
 
-        if (Input::pressed(u"right")) {
+        if (Input::isPressed(u"right")) {
             posX += 0.1;
         }
 
-        if (Input::pressed(u"up")) {
+        if (Input::isPressed(u"up")) {
             posY += 0.1;
         }
 
-        if (Input::pressed(u"down")) {
+        if (Input::isPressed(u"down")) {
             posY -= 0.1;
         }
 
         // Z key, reset position
-        if (Input::triggered(u"submit")) {
+        if (Input::isTriggered(u"submit")) {
             posX = 0.0;
             posY = 0.0;
         }
@@ -143,17 +143,17 @@ class App : public Application
 {
     virtual void onUpdate() override
     {
-        if (Input::pressed(u"left")) Debug::print(0, u"left");
-        if (Input::pressed(u"right")) Debug::print(0, u"right");
-        if (Input::pressed(u"up")) Debug::print(0, u"up");
-        if (Input::pressed(u"down")) Debug::print(0, u"down");
-        if (Input::pressed(u"submit")) Debug::print(0, u"submit");
-        if (Input::pressed(u"cancel")) Debug::print(0, u"cancel");
-        if (Input::pressed(u"menu")) Debug::print(0, u"menu");
-        if (Input::pressed(u"shift")) Debug::print(0, u"shift");
-        if (Input::pressed(u"pageup")) Debug::print(0, u"pageup");
-        if (Input::pressed(u"pagedown")) Debug::print(0, u"pagedown");
-        if (Input::pressed(u"any")) Debug::print(0, u"any");
+        if (Input::isPressed(u"left")) Debug::print(0, u"left");
+        if (Input::isPressed(u"right")) Debug::print(0, u"right");
+        if (Input::isPressed(u"up")) Debug::print(0, u"up");
+        if (Input::isPressed(u"down")) Debug::print(0, u"down");
+        if (Input::isPressed(u"submit")) Debug::print(0, u"submit");
+        if (Input::isPressed(u"cancel")) Debug::print(0, u"cancel");
+        if (Input::isPressed(u"menu")) Debug::print(0, u"menu");
+        if (Input::isPressed(u"shift")) Debug::print(0, u"shift");
+        if (Input::isPressed(u"pageup")) Debug::print(0, u"pageup");
+        if (Input::isPressed(u"pagedown")) Debug::print(0, u"pagedown");
+        if (Input::isPressed(u"any")) Debug::print(0, u"any");
     }
 };
 
