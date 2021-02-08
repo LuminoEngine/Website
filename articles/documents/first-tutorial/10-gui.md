@@ -34,6 +34,7 @@ class App < Application
   def on_init
     texture = Texture2D.load("picture1.jpg")
     sprite = UISprite.new(texture)
+    sprite.add_into
   end
 end
 

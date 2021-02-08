@@ -40,16 +40,17 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    box = BoxMesh.new
+    def on_init
+        box = BoxMesh.new
+        box.add_into
 
-    camera = Engine.camera
-    camera.set_position(5, 5, -5)
-    camera.look_at(0, 0, 0)
+        camera = Engine.camera
+        camera.set_position(5, 5, -5)
+        camera.look_at(0, 0, 0)
 
-    light = Engine::light
-    light.look_at(0, -1, 0);
-  end
+        light = Engine.main_light
+        light.look_at(0, -1, 0);
+    end
 end
 
 App.new.run

@@ -135,6 +135,7 @@ class App < Application
     def on_init
         box = BoxMesh.new(1, 1, 1)  # 横幅、縦幅、奥行 をそれぞれ 1 とする
         box.add_into                # デフォルトのワールドへ追加する
+    end
 end
 
 App.new.run
@@ -207,6 +208,7 @@ require "lumino"
 class App < Application
     def on_init
         box = BoxMesh.new
+        box.add_into
 
         camera = Engine.camera
         camera.set_position(5, 5, -5)
@@ -305,21 +307,22 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    @box = BoxMesh.new
+    def on_init
+        @box = BoxMesh.new
+        @box.add_into
 
-    camera = Engine.camera
-    camera.set_position(5, 5, -5)
-    camera.look_at(0, 0, 0)
-  end
-  
-  def on_update
-    raycaster = Raycaster.from_screen(Mouse.position)  # (1)
-    result = raycaster.intersect_plane(0, 1, 0)  # (2)
-    if result
-      @box.set_position(result.point) # (3)
+        camera = Engine.camera
+        camera.set_position(5, 5, -5)
+        camera.look_at(0, 0, 0)
     end
-  end
+    
+    def on_update
+        raycaster = Raycaster.from_screen(Mouse.position)  # (1)
+        result = raycaster.intersect_plane(0, 1, 0)  # (2)
+        if result
+            @box.set_position(result.point) # (3)
+        end
+    end
 end
 
 App.new.run
@@ -411,20 +414,21 @@ onInit() の先頭に2行の新しいコードが増えています。
 require "lumino"
 
 class App < Application
-  def on_init
-    Engine.render_view.guide_grid_enabled = true
-    Engine.camera.add_component(CameraOrbitControlComponent.new)
-    
-    @box = BoxMesh.new
-  end
-  
-  def on_update
-    raycaster = Raycaster.from_screen(Mouse.position)
-    result = raycaster.intersect_plane(0, 1, 0)
-    if result
-      @box.set_position(result.point)
+    def on_init
+        Engine.render_view.guide_grid_enabled = true
+        Engine.camera.add_component(CameraOrbitControlComponent.new)
+        
+        @box = BoxMesh.new
+        @box.add_into
     end
-  end
+    
+    def on_update
+        raycaster = Raycaster.from_screen(Mouse.position)
+        result = raycaster.intersect_plane(0, 1, 0)
+        if result
+            @box.set_position(result.point)
+        end
+    end
 end
 
 App.new.run

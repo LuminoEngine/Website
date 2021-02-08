@@ -49,8 +49,10 @@
     href: first-tutorial/15-physics.md
   - name: 16. アセットを管理する (TBD)
     href: first-tutorial/16-assets.md
-  - name: 17. アプリをリリースする (TBD)
-    href: first-tutorial/17-publish.md
+  - name: 17. デバッグする
+    href: first-tutorial/17-debug.md
+  - name: 18. アプリをリリースする (TBD)
+    href: first-tutorial/18-publish.md
 
 - name: TIPS
   items:

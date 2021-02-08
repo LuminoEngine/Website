@@ -36,23 +36,23 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    Engine.render_view.guide_grid_enabled = true
-    Engine.camera.set_position(5, 5, -5)
-    Engine.camera.look_at(0, 0, 0)
-    
-    box1 = BoxMesh.new
-    box1.add_into
-    box1.set_position(1, 0, 0)
+    def on_init
+        Engine.render_view.guide_grid_enabled = true
+        Engine.camera.set_position(5, 5, -5)
+        Engine.camera.look_at(0, 0, 0)
+        
+        box1 = BoxMesh.new
+        box1.set_position(1, 0, 0)
+        box1.add_into
 
-    box2 = BoxMesh.new
-    box2.add_into
-    box2.set_position(0, 2, 0)
+        box2 = BoxMesh.new
+        box2.set_position(0, 2, 0)
+        box2.add_into
 
-    box3 = BoxMesh.new
-    box3.add_into
-    box3.set_position(0, 0, 3)
-  end
+        box3 = BoxMesh.new
+        box3.set_position(0, 0, 3)
+        box3.add_into
+    end
 end
 
 App.new.run
@@ -99,22 +99,22 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    Engine.render_view.guide_grid_enabled = true
-    Engine.camera.set_position(5, 5, -5)
-    Engine.camera.look_at(0, 0, 0)
-    
-    @box = BoxMesh.new
-    @box.add_into
-  end
-  
-  def on_update
-    r = Mouse.position.x / 100
-    
-    @box.set_rotation(0, r, 0)
+    def on_init
+        Engine.render_view.guide_grid_enabled = true
+        Engine.camera.set_position(5, 5, -5)
+        Engine.camera.look_at(0, 0, 0)
         
-    Debug.print(0, "angle: %f" % r)
-  end
+        @box = BoxMesh.new
+        @box.add_into
+    end
+    
+    def on_update
+        r = Mouse.position.x / 100
+        
+        @box.set_rotation(0, r, 0)
+            
+        Debug.print(0, "angle: %f" % r)
+    end
 end
 
 App.new.run
@@ -162,22 +162,22 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    Engine.render_view.guide_grid_enabled = true
-    Engine.camera.set_position(5, 5, -5)
-    Engine.camera.look_at(0, 0, 0)
-    
-    @box = BoxMesh.new
-    @box.add_into
-  end
-  
-  def on_update
-    s = Mouse.position.y / 100
-    
-    @box.set_scale(s)
+    def on_init
+        Engine.render_view.guide_grid_enabled = true
+        Engine.camera.set_position(5, 5, -5)
+        Engine.camera.look_at(0, 0, 0)
         
-    Debug.print(0, "scale: %f" % s)
-  end
+        @box = BoxMesh.new
+        @box.add_into
+    end
+    
+    def on_update
+        s = Mouse.position.y / 100
+        
+        @box.set_scale(s)
+            
+        Debug.print(0, "scale: %f" % s)
+    end
 end
 
 App.new.run

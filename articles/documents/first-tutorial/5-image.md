@@ -34,10 +34,11 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load("picture1.jpg")
-    sprite = Sprite.new(texture)
-  end
+    def on_init
+        texture = Texture2D.load("picture1.jpg")
+        sprite = Sprite.new(texture)
+        sprite.add_into
+    end
 end
 
 App.new.run
@@ -96,12 +97,12 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load("picture1.jpg")
-    sprite = Sprite.new(texture)
-    sprite.set_size(3, 3)
-    sprite.add_into
-  end
+    def on_init
+        texture = Texture2D.load("picture1.jpg")
+        sprite = Sprite.new(texture)
+        sprite.set_size(3, 3)
+        sprite.add_into
+    end
 end
 
 App.new.run
@@ -137,11 +138,11 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load_emoji("🌱")
-    sprite = Sprite.new(texture)
-    sprite.add_into
-  end
+    def on_init
+        texture = Texture2D.load_emoji("🌱")
+        sprite = Sprite.new(texture)
+        sprite.add_into
+    end
 end
 
 App.new.run
