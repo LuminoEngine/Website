@@ -27,15 +27,15 @@ HSPスクリプトエディタを開き、次のプログラムを入力して�
 
 ```hsp
 #include "lumino.as"
+LUMINO_APP
 
-LNEngine_Init
+*on_init
+	LNUIText_CreateWithText "Hello, Lumino!", text
+	LNUIElement_AddInto text
+    return
 
-LNUITextBlock_CreateWithText "Hello, Lumino!", textBlock
-LNUI_Add textBlock
-
-repeat
-    LNEngine_Update
-loop
+*on_update
+    return
 ```
 
 続いてプログラムを実行してみます。

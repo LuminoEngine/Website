@@ -98,8 +98,9 @@ class App < Application
   def on_init
     texture = Texture2D.load("picture1.jpg")
     sprite = UISprite.new(texture)
-    sprite.set_alignments(HAlignment::LEFT, VAlignment::TOP);
+    sprite.set_alignments(UIHAlignment::LEFT, UIVAlignment::TOP);
     sprite.set_position(100, 50);
+    sprite.add_into
   end
 end
 
@@ -145,6 +146,7 @@ class App < Application
     button.connect_on_clicked do
       Debug.print("Hello, UI!")
     end
+    button.add_into
   end
 end
 

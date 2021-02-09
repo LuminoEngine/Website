@@ -62,18 +62,19 @@ require "lumino"
 class App < Application
   def on_init
     @box = BoxMesh.new
+    @box.add_into
     @pos_x = 0.0
     @pos_y = 0.0
   end
   
   def on_update
-    @pos_x -= 0.1 if Input.pressed("left")
-    @pos_x += 0.1 if Input.pressed("right")
-    @pos_y += 0.1 if Input.pressed("up")
-    @pos_y -= 0.1 if Input.pressed("down")
+    @pos_x -= 0.1 if Input.pressed?("left")
+    @pos_x += 0.1 if Input.pressed?("right")
+    @pos_y += 0.1 if Input.pressed?("up")
+    @pos_y -= 0.1 if Input.pressed?("down")
 
     # Z key, reset position
-    if Input.triggered("submit")
+    if Input.triggered?("submit")
       @pos_x = 0.0
       @pos_y = 0.0
     end
@@ -165,17 +166,17 @@ require "lumino"
 
 class App < Application
   def on_update
-    Debug.print(0, "left") if Input.pressed("left")
-    Debug.print(0, "right") if Input.pressed("right")
-    Debug.print(0, "up") if Input.pressed("up")
-    Debug.print(0, "down") if Input.pressed("down")
-    Debug.print(0, "submit") if Input.pressed("submit")
-    Debug.print(0, "cancel") if Input.pressed("cancel")
-    Debug.print(0, "menu") if Input.pressed("menu")
-    Debug.print(0, "shift") if Input.pressed("shift")
-    Debug.print(0, "pageup") if Input.pressed("pageup")
-    Debug.print(0, "pagedown") if Input.pressed("pagedown")
-    Debug.print(0, "any") if Input.pressed("any")
+    Debug.print(0, "left") if Input.pressed?("left")
+    Debug.print(0, "right") if Input.pressed?("right")
+    Debug.print(0, "up") if Input.pressed?("up")
+    Debug.print(0, "down") if Input.pressed?("down")
+    Debug.print(0, "submit") if Input.pressed?("submit")
+    Debug.print(0, "cancel") if Input.pressed?("cancel")
+    Debug.print(0, "menu") if Input.pressed?("menu")
+    Debug.print(0, "shift") if Input.pressed?("shift")
+    Debug.print(0, "pageup") if Input.pressed?("pageup")
+    Debug.print(0, "pagedown") if Input.pressed?("pagedown")
+    Debug.print(0, "any") if Input.pressed?("any")
   end
 end
 
