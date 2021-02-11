@@ -10,6 +10,7 @@ GUI を作る
 
 以前の章で 3D 空間にスプライトを表示しましたが、今回は `UISprite` を使います。
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -41,6 +42,7 @@ end
 App.new.run
 ```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/gui-1.png)
 
@@ -72,6 +74,7 @@ UIElement は [CSS](https://ja.wikipedia.org/wiki/Cascading_Style_Sheets) ライ
 
 次のプログラムでは座標の変化をイメージするために、左上を原点として座標を設定してみます。
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -106,7 +109,24 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
+
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNUISprite_CreateWithTexture texture, sprite
+    LNUIElement_SetAlignments sprite, LN_UIHALIGNMENT_LEFT, LN_UIVALIGNMENT_TOP
+    LNUIElement_SetPositionXYZ sprite, 100, 50
+    LNUIElement_AddInto sprite
+    return
+
+*on_update
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/gui-3.png)
 
@@ -118,6 +138,7 @@ App.new.run
 
 あらかじめ処理を登録しておくことで、クリックやタップ操作といった `イベント` が発生したときに、その処理を実行します。
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -152,7 +173,26 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
+
+*on_init
+    LNUIButton_CreateWithText "Button", btn
+    LNUIButton_ConnectOnClicked btn, *clicked
+    LNUIElement_AddInto btn
+    return
+
+*on_update
+    return
+
+*clicked
+    LNDebug_Print "Hsello, UI!"
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/gui-4.gif)
 

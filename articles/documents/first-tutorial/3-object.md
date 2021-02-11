@@ -57,7 +57,36 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNEngine_GetRenderView render_view
+    LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
+
+    LNEngine_GetMainCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+
+    LNBoxMesh_Create box1
+    LNWorldObject_SetPositionXYZ box1, 1, 0, 0
+    LNWorldObject_AddInto box1
+    
+    LNBoxMesh_Create box2
+    LNWorldObject_SetPositionXYZ box2, 0, 2, 0
+    LNWorldObject_AddInto box2
+
+    LNBoxMesh_Create box3
+    LNWorldObject_SetPositionXYZ box3, 0, 0, 3
+    LNWorldObject_AddInto box3
+    
+    return
+
+*on_update
+    return
+```
 ---
 
 ![](img/object-1.png)
@@ -119,7 +148,35 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNEngine_GetRenderView render_view
+    LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
+
+    LNEngine_GetMainCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+
+    LNBoxMesh_Create box
+    LNWorldObject_AddInto box
+    
+    return
+
+*on_update
+    LNMouse_GetPosition p
+	LNPoint_Get p, x, y
+    r = x / 100.0
+    
+    LNWorldObject_SetRotationXYZ box, 0, r, 0
+    
+    LNDebug_PrintWithTime 0, strf("angle: %f", r)
+    
+    return
+```
 ---
 
 ![](img/object-2.gif)
@@ -182,7 +239,35 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNEngine_GetRenderView render_view
+    LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
+
+    LNEngine_GetMainCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+
+    LNBoxMesh_Create box
+    LNWorldObject_AddInto box
+    
+    return
+
+*on_update
+    LNMouse_GetPosition p
+	LNPoint_Get p, x, y
+    s = y / 100.0
+    
+    LNWorldObject_SetScaleXYZ box, s, s, s
+    
+    LNDebug_PrintWithTime 0, strf("angle: %f", r)
+    
+    return
+```
 ---
 
 ![](img/object-3.gif)

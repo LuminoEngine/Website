@@ -14,6 +14,7 @@
 
 次のコードで、カメラと同じように向きを変え、中天から直下を照らすようにしてみます。
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -55,8 +56,28 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNBoxMesh_CreateWithSize 1, 1, 1, box
+    LNWorldObject_AddInto box
+
+    LNEngine_GetMainCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+
+    LNEngine_GetMainLight light
+    LNWorldObject_LookAtXYZ light, 0, -1, 0
+    return
+
+*on_update
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/graphics-basic-7.png)
 

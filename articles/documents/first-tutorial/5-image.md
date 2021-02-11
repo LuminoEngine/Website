@@ -14,6 +14,7 @@ Sprite は画像を張り付けて表示するための板のようなもので�
 
 ![](img/picture1.jpg)
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -43,8 +44,22 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNSprite_CreateWithTexture texture, sprite
+    LNWorldObject_AddInto sprite
+    return
+
+*on_update
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/image-1.png)
 
@@ -107,6 +122,21 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
+
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNSprite_CreateWithTexture texture, sprite
+    LNSprite_SetSizeWH sprite, 3, 3
+    LNWorldObject_AddInto sprite
+    return
+
+*on_update
+    return
+```
 ---
 
 ![](img/image-3.png)
@@ -146,6 +176,11 @@ class App < Application
 end
 
 App.new.run
+```
+# [HSP3](#tab/lang-hsp3)
+```c
+ver3.51 時点の HSP3 は Shift_JIS を前提としているため、スクリプトエディタで絵文字を入力することはできません。
+TODO: ファイルから UTF-8 文字列を読み込む方法
 ```
 ---
 

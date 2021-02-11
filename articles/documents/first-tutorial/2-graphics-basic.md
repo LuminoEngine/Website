@@ -219,7 +219,7 @@ end
 App.new.run
 ```
 # [HSP3](#tab/lang-hsp3)
-デフォルトのカメラは `LNEngine_GetCamera` で取得し、`LNWorldObject_SetPositionXYZ` で 3D 位置を指定します。また、位置を指定した後に `LNWorldObject_LookAtXYZ` でワールドの原点を向くようにします。
+デフォルトのカメラは `LNEngine_GetMainCamera` で取得し、`LNWorldObject_SetPositionXYZ` で 3D 位置を指定します。また、位置を指定した後に `LNWorldObject_LookAtXYZ` でワールドの原点を向くようにします。
 ```c
 #include "lumino.as"
 
@@ -229,7 +229,7 @@ LUMINO_APP
     LNBoxMesh_CreateWithSize 1, 1, 1, box
     LNWorldObject_AddInto box
 
-    LNEngine_GetCamera camera
+    LNEngine_GetMainCamera camera
     LNWorldObject_SetPositionXYZ camera, 5, 5, -5
     LNWorldObject_LookAtXYZ camera, 0, 0, 0
     
@@ -341,7 +341,7 @@ LUMINO_APP
     LNBoxMesh_CreateWithSize 1, 1, 1, box
     LNWorldObject_AddInto box
 
-    LNEngine_GetCamera camera
+    LNEngine_GetMainCamera camera
     LNWorldObject_SetPositionXYZ camera, 5, 5, -5
     LNWorldObject_LookAtXYZ camera, 0, 0, 0
     
@@ -447,16 +447,14 @@ LUMINO_APP
     // 追加部分
     LNEngine_GetRenderView render_view
     LNWorldRenderView_SetGuideGridEnabled render_view, LN_TRUE
-    LNEngine_GetCamera camera
+    LNEngine_GetMainCamera camera
     LNCameraOrbitControlComponent_Create orbit_control
     LNWorldObject_AddComponent camera, orbit_control
 
     LNBoxMesh_Create box
+    LNWorldObject_AddInto box
 
-    LNEngine_GetWorld world
-    LNWorld_Add world, box
-
-    LNEngine_GetCamera camera
+    LNEngine_GetMainCamera camera
     LNWorldObject_SetPositionXYZ camera, 5, 5, -5
     LNWorldObject_LookAtXYZ camera, 0, 0, 0
     
@@ -466,7 +464,7 @@ LUMINO_APP
     LNMouse_GetPosition p
     LNRaycaster_FromScreen p, raycaster
     LNRaycaster_IntersectPlane raycaster, 0, 1, 0, result
-    if result {
+    if result != LN_NULL_HANDLE {
         LNRaycastResult_GetPoint result, p
         LNWorldObject_SetPosition box, p
     }
