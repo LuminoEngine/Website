@@ -43,7 +43,8 @@
           "img/**",
           "articles/**/img/**",
           "logo.png",
-          "favicon.ico"
+          "favicon.ico",
+          "assets.zip"
         ],
         "exclude": [
           "obj/**",

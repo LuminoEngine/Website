@@ -41,6 +41,20 @@ end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
+
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNUISprite_CreateWithTexture texture, sprite
+    LNUIElement_AddInto sprite
+    return
+
+*on_update
+    return
+```
 ---
 <!-- -------------------------------------------------------------------------------- -->
 

@@ -1,31 +1,24 @@
 ダウンロード
 ==========
 
-最新リリース (0.9.0)
+最新リリース (0.10.0)
 ----------
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-Windows.msi" class="button">
-  <i class="glyphicon glyphicon-download"></i>Windows (Installer)
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-Windows.msi" class="button">
+  <i class="glyphicon glyphicon-download"></i>C++ (Windows Installer)
 </a>
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-Windows.zip" class="button">
-  <i class="glyphicon glyphicon-download"></i>Windows (ZIP archive)
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-Windows.zip" class="button">
+  <i class="glyphicon glyphicon-download"></i>C++ (Windows, ZIP archive)
 </a>
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-macOS.zip" class="button">
-  <i class="glyphicon glyphicon-download"></i>macOS (ZIP archive)
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-HSP3.zip" class="button">
+  <i class="glyphicon glyphicon-download"></i>HSP3 (Windows, ZIP archive)
 </a>
 
-パッケージは開発環境ごとに用意されており、各ターゲットプラットフォーム向けのビルドに必要なファイルが含まれています。
+上記以外のパッケージは [現在開発中の最新ビルド](#現在開発中の最新ビルド) を参照してください。
 
-Windows パッケージには次のターゲットをビルドするためのファイルが含まれています。
-- Win32
-- Web
-- Android
-
-macOS パッケージには次のターゲットをビルドするためのファイルが含まれています。
-- macOS
-- iOS
+なお v0.10.0 では OpenGL サポートを外しているため、macOS, iOS, Web プラットフォームではグラフィックス機能を利用することはできません。
 
 現在開発中の最新ビルド
 ----------
@@ -38,9 +31,22 @@ macOS パッケージには次のターゲットをビルドするためのフ�
 
 ![](img/download-2.png)
 
-
 古いリリース
 ----------
+
+### 0.9.0
+
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-Windows.msi" class="button">
+  <i class="glyphicon glyphicon-download"></i>Windows (Installer)
+</a>
+
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-Windows.zip" class="button">
+  <i class="glyphicon glyphicon-download"></i>Windows (ZIP archive)
+</a>
+
+<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.9.0/Lumino-v0.9.0-macOS.zip" class="button">
+  <i class="glyphicon glyphicon-download"></i>macOS (ZIP archive)
+</a>
 
 ### 0.8.0
 

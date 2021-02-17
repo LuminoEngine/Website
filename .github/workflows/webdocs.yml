@@ -31,7 +31,10 @@ jobs:
     # Since docfx-action is executed as root, create a directory as a normal user first
     - name: Prepare
       run: |
+        sudo apt-get update
+        sudo apt-get install doxygen graphviz zip
         git clone https://${CI_PUSH_TOKEN}@github.com/LuminoEngine/LuminoEngine.github.io.git _site
+        zip -r ./assets.zip ./assets
 
     - name: Build docfx
       uses: nikeee/docfx-action@master
@@ -40,8 +43,6 @@ jobs:
 
     - name: Deploy
       run: |
-        sudo apt-get update
-        sudo apt-get install doxygen graphviz
         gem install yard
         python clearn_deploy_target.py
         python build.py

@@ -7,18 +7,18 @@ HSP3 で Lumino をはじめる
 - Windows 10 (64bit)
 - HSP 3.5.1+
 
-HSP3 開発環境をセットアップする
+開発環境の準備を行う
 ----------
+### HSP3 をインストールする
 
-[HSPTV] (https://hsp.tv/index2.html) にアクセスし、最新の HSP3 開発環境をダウンロードしてインストールしてください。
+1. [HSPTV] (https://hsp.tv/index2.html) にアクセスし、最新の HSP3 開発環境をダウンロードしてインストールしてください。
 
-インストール方法
---------------------
+### Lumino をインストールする
 
-1. "LuminoHSP3.dll" を HSP3 のエディタ (hsed3.exe) と同じフォルダにコピーします。
-2. "lumino.as" を 1 のフォルダにある "common" フォルダにコピーします。
-3. "lumino.hs" を 1 のフォルダにある "hsphelp" フォルダにコピーします。
-
+1. [LuminoHSP3 のパッケージ](http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-HSP3.zip) をダウンロードし、展開してください。
+2. "LuminoHSP3.dll" を HSP3 のエディタ (hsed3.exe) と同じフォルダにコピーします。
+3. "lumino.as" を 2 のフォルダにある "common" フォルダにコピーします。
+4. "lumino.hs" を 2 のフォルダにある "hsphelp" フォルダにコピーします。
 
 最初のプログラム
 ----------
