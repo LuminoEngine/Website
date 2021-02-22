@@ -3,7 +3,16 @@ Lumino の基本
 
 この章では、Lumino を使ってアプリケーションを作成するための最も基本的な流れについて学びます。
 
-最小のプログラム
+はじめる前に
+----------
+
+このチュートリアル内で使用する画像などの素材ファイルをダウンロードしてください。
+
+- [assets.zip](../../../assets.zip)
+
+ただし、VisualStudio(C++) や lumino-rbコマンド(Ruby) を使ってプロジェクトを作成した場合は既に assets フォルダ内に含まれているため不要です。
+
+基本的なプログラムの構造
 ----------
 
 「最初のプログラム」で見たように、Lumino でアプリを開発するには Application クラスの実装から始めます。
@@ -33,6 +42,20 @@ end
 App.new.run
 ```
 
+# [HSP3](#tab/lang-hsp3)
+
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    return
+
+*on_update
+    return
+```
+
 ---
 
 実行して、ウィンドウを表示してみましょう。
@@ -41,7 +64,7 @@ App.new.run
 
 この時点でできることは、クローズボタンなどでウィンドウを閉じるだけです。
 
-文字を表示したり、ユーザー入力を受けてインタラクションを実現するためにはこの App クラスにいくつかのメソッドを実装する必要があります。
+文字を表示したりユーザー入力を受けて動きを表現するためには、この App クラスにいくつかのメソッドを実装する必要があります。
 
 
 初期化と更新
@@ -52,9 +75,9 @@ App.new.run
 - プログラムの開始時に変数を初期化する
 - プログラムが動き出したら、繰り返し変数を変更する
 
-これらを行うために、次のように 2 つのメソッド定義を追加します。
-
 # [C++](#tab/lang-cpp)
+
+これらの処理を行うために、次のように 2 つのメソッド定義を追加します。
 
 ```cpp
 #include <Lumino.hpp>
@@ -73,7 +96,12 @@ class App : public Application
 LUMINO_APP(App);
 ```
 
+* `onInit` はアプリケーションの開始時に 1 回だけ呼び出されます。ここには変数などの初期化処理を書きます。
+* `onUpdate` はアプリケーションの実行中、繰り返し呼び出されます。ここには変数などの更新処理を書きます。
+
 # [Ruby](#tab/lang-ruby)
+
+これらの処理を行うために、次のように 2 つのメソッド定義を追加します。
 
 ```ruby
 require "lumino"
@@ -89,14 +117,34 @@ end
 App.new.run
 ```
 
+* `on_init` はアプリケーションの開始時に 1 回だけ呼び出されます。ここには変数などの初期化処理を書きます。
+* `on_update` はアプリケーションの実行中、繰り返し呼び出されます。ここには変数などの更新処理を書きます。
+
+# [HSP3](#tab/lang-hsp3)
+
+これらの処理を行うための空のラベルが、先ほどのプログラムに書かれています。
+
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init    // 初期化
+    return
+
+*on_update  // 更新
+    return
+```
+
+* `on_init` はアプリケーションの開始時に 1 回だけ呼び出されます。ここには変数などの初期化処理を書きます。
+* `on_update` はアプリケーションの実行中、繰り返し呼び出されます。ここには変数などの更新処理を書きます。
+
 ---
 
-空のメソッドを追加しただけなので、実行するとウィンドウは表示できますが、動きは変わりません。
-
-この後のチュートリアルやサンプルで紹介するプログラムでは、プログラムの開始時に1回呼び出される onInit() メソッドで変数を初期化し、onUpdate() メソッドでこれらの変数を変更して、アプリケーションを実装していくことになります。
+処理内容は書かれていないため、実行するとウィンドウは表示できますが、動きに変わりはありません。
 
 > [!Note]
-> onUpdate() は 1秒間に 60 回、繰り返し実行されます。
+> 更新処理は 1秒間に 60 回、繰り返し実行されます。
 > この 1 回分の実行単位を `フレーム` と呼び、「1 秒間は 60 フレーム」といったように使います。
 
 
@@ -105,7 +153,7 @@ Hello, Lumino!
 
 ウィンドウに文字列を表示してみましょう。
 
-テキストや数値を画面に表示するには、Lumino の デバッグようの機能である、Debug クラスの print() メソッドを使うと簡単にできます。
+テキストや数値を画面に表示するには、Lumino の デバッグ用の機能である、Debug クラスの機能を使うのが簡単です。
 
 # [C++](#tab/lang-cpp)
 
@@ -144,6 +192,21 @@ end
 App.new.run
 ```
 
+# [HSP3](#tab/lang-hsp3)
+
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    LNDebug_Print "Hello, Lumino!"
+    return
+	
+*on_update
+    return
+```
+
 ---
 
 文字列がウィンドウ上に表示されます。（その後、しばらくすると消えます）
@@ -154,9 +217,14 @@ App.new.run
 文字列を表示し続ける
 ----------
 
-次は onUpdate で文字列を表示してみます。
+次は更新処理の動作を確認してみます。
+
+Lumino にはアプリケーションの起動からの経過時間を取得する機能がありますので、これを使って時間を表示し続けてみます。
 
 # [C++](#tab/lang-cpp)
+
+アプリケーションの起動からの経過時間を取得するには、`Engine::time()` を使います。
+
 ```cpp
 #include <Lumino.hpp>
 
@@ -174,7 +242,11 @@ class App : public Application
 
 LUMINO_APP(App);
 ```
+
 # [Ruby](#tab/lang-ruby)
+
+アプリケーションの起動からの経過時間を取得するには、`Engine.time` を使います。
+
 ```ruby
 require "lumino"
 
@@ -189,9 +261,27 @@ end
 
 App.new.run
 ```
----
 
-`Engine::time()` は アプリケーションの起動からの経過時間を返します。これを利用して、onUpdate() がどのくらいの頻度で実行されているのかを確認してみます。
+# [HSP3](#tab/lang-hsp3)
+
+アプリケーションの起動からの経過時間を取得するには、`LNEngine_GetTime` を使います。
+
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    return
+
+*on_update
+    time = 0
+    LNEngine_GetTime time
+    LNDebug_Print strf("Time: %f", time)
+    return
+```
+
+---
 
 ![](img/basic-3.png)
 
@@ -199,9 +289,10 @@ App.new.run
 
 繰り返し実行されているのはわかりましたが、今は過去の情報は不要です。
 
+# [C++](#tab/lang-cpp)
+
 `Debug::print()` は第一引数に数値を指定することで、テキストの表示時間をコントロールできます。次のように 0 を指定することで、テキストは 1 フレームの間だけ表示されるようになります。
 
-# [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
 
@@ -220,6 +311,9 @@ class App : public Application
 LUMINO_APP(App);
 ```
 # [Ruby](#tab/lang-ruby)
+
+`Debug.print()` は第一引数に数値を指定することで、テキストの表示時間をコントロールできます。次のように 0 を指定することで、テキストは 1 フレームの間だけ表示されるようになります。
+
 ```ruby
 require "lumino"
 
@@ -234,6 +328,26 @@ end
 
 App.new.run
 ```
+
+# [HSP3](#tab/lang-hsp3)
+
+`LNDebug_PrintWithTime` を使うことで、テキストの表示時間をコントロールできます。次のように第1引数に 0 を指定することで、テキストは 1 フレームの間だけ表示されるようになります。
+
+```c
+#include "lumino.as"
+
+LUMINO_APP
+
+*on_init
+    return
+
+*on_update
+    time = 0
+    LNEngine_GetTime time
+    LNDebug_PrintWithTime 0, strf("Time: %f", time)
+    return
+```
+
 ---
 
 修正したら、実行してみましょう。

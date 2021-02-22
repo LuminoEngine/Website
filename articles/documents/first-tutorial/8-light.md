@@ -14,6 +14,7 @@
 
 次のコードで、カメラと同じように向きを変え、中天から直下を照らすようにしてみます。
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -22,13 +23,13 @@ class App : public Application
 {
     void onInit() override
     {
-        auto box = BoxMesh::create();
+        auto box = BoxMesh::With().buildInto();
 
         auto camera = Engine::camera();
         camera->setPosition(5, 5, -5);
         camera->lookAt(0, 0, 0);
 
-        auto light = Engine::light();
+        auto light = Engine::mainLight();
         light->lookAt(0, -1, 0);
     }
 };
@@ -40,22 +41,43 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    box = BoxMesh.new
+    def on_init
+        box = BoxMesh.new
+        box.add_into
 
-    camera = Engine.camera
-    camera.set_position(5, 5, -5)
-    camera.look_at(0, 0, 0)
+        camera = Engine.camera
+        camera.set_position(5, 5, -5)
+        camera.look_at(0, 0, 0)
 
-    light = Engine::light
-    light.look_at(0, -1, 0);
-  end
+        light = Engine.main_light
+        light.look_at(0, -1, 0);
+    end
 end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNBoxMesh_CreateWithSize 1, 1, 1, box
+    LNWorldObject_AddInto box
+
+    LNEngine_GetMainCamera camera
+    LNWorldObject_SetPositionXYZ camera, 5, 5, -5
+    LNWorldObject_LookAtXYZ camera, 0, 0, 0
+
+    LNEngine_GetMainLight light
+    LNWorldObject_LookAtXYZ light, 0, -1, 0
+    return
+
+*on_update
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/graphics-basic-7.png)
 

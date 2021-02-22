@@ -1,4 +1,4 @@
-画像を描画する
+画像を表示する
 ==========
 
 この章では、2D 画像を表す `テクスチャ` と、それを効率的にワールド上に表示する `スプライト` について学びます。
@@ -10,10 +10,11 @@
 
 Sprite は画像を張り付けて表示するための板のようなものであると考えてください。
 
-ここでは次の画像を表示してみます。チュートリアル冒頭で作成したプロジェクトの `assets` フォルダの中に、次のような `picture1.jpg` というファイルが入っていることを確認して実行してください。
+ここでは次の画像を表示してみます。チュートリアル冒頭で準備した `assets` フォルダの中に、次のような `picture1.jpg` というファイルが入っていることを確認して実行してください。
 
 ![](img/picture1.jpg)
 
+<!-- -------------------------------------------------------------------------------- -->
 # [C++](#tab/lang-cpp)
 ```cpp
 #include <Lumino.hpp>
@@ -23,7 +24,7 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::load(u"picture1.jpg");
-        auto sprite = Sprite::create(texture);
+        auto sprite = Sprite::With(texture).buildInto();
     }
 };
 
@@ -34,16 +35,31 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load("picture1.jpg")
-    sprite = Sprite.new(texture)
-  end
+    def on_init
+        texture = Texture2D.load("picture1.jpg")
+        sprite = Sprite.new(texture)
+        sprite.add_into
+    end
 end
 
 App.new.run
 ```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
 
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNSprite_CreateWithTexture texture, sprite
+    LNWorldObject_AddInto sprite
+    return
+
+*on_update
+    return
+```
 ---
+<!-- -------------------------------------------------------------------------------- -->
 
 ![](img/image-1.png)
 
@@ -83,8 +99,9 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::load(u"picture1.jpg");
-        auto sprite = Sprite::create(texture);
-        sprite->setSize(3, 3);
+        auto sprite = Sprite::With(texture)
+            .size(3, 3)
+            .buildInto();
     }
 };
 
@@ -95,14 +112,30 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load("picture1.jpg")
-    sprite = Sprite.new(texture)
-    sprite.set_size(3, 3)
-  end
+    def on_init
+        texture = Texture2D.load("picture1.jpg")
+        sprite = Sprite.new(texture)
+        sprite.set_size(3, 3)
+        sprite.add_into
+    end
 end
 
 App.new.run
+```
+# [HSP3](#tab/lang-hsp3)
+```c
+#include "lumino.as"
+LUMINO_APP
+
+*on_init
+    LNTexture2D_Load "picture1.jpg", texture
+    LNSprite_CreateWithTexture texture, sprite
+    LNSprite_SetSizeWH sprite, 3, 3
+    LNWorldObject_AddInto sprite
+    return
+
+*on_update
+    return
 ```
 ---
 
@@ -124,7 +157,7 @@ class App : public Application
     void onInit() override
     {
         auto texture = Texture2D::loadEmoji(u"🌱");
-        auto sprite = Sprite::create(texture);
+        auto sprite = Sprite::With(texture).buildInto();
     }
 };
 
@@ -135,13 +168,19 @@ LUMINO_APP(App);
 require "lumino"
 
 class App < Application
-  def on_init
-    texture = Texture2D.load_emoji("🌱")
-    sprite = Sprite.new(texture)
-  end
+    def on_init
+        texture = Texture2D.load_emoji("🌱")
+        sprite = Sprite.new(texture)
+        sprite.add_into
+    end
 end
 
 App.new.run
+```
+# [HSP3](#tab/lang-hsp3)
+```c
+ver3.51 時点の HSP3 は Shift_JIS を前提としているため、スクリプトエディタで絵文字を入力することはできません。
+TODO: ファイルから UTF-8 文字列を読み込む方法
 ```
 ---
 
