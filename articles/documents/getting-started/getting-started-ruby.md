@@ -49,7 +49,8 @@ require "lumino"
 
 class App < Application
   def on_init
-    text = UITextBlock.new("Hello, Lumino!")
+    text = UIText.new("Hello, Lumino!")
+    text.add_into
   end
 end
 
