@@ -15,7 +15,7 @@ HSP3 で Lumino をはじめる
 
 ### Lumino をインストールする
 
-1. [LuminoHSP3 のパッケージ](http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-HSP3.zip) をダウンロードし、展開してください。
+1. [LuminoHSP3 のパッケージ](https://github.com/LuminoEngine/Lumino/releases/download/v0.10.0/Lumino-v0.10.0-HSP3.zip) をダウンロードし、展開してください。
 2. "LuminoHSP3.dll" を HSP3 のエディタ (hsed3.exe) と同じフォルダにコピーします。
 3. "lumino.as" を 2 のフォルダにある "common" フォルダにコピーします。
 4. "lumino.hs" を 2 のフォルダにある "hsphelp" フォルダにコピーします。

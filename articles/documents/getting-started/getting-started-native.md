@@ -16,7 +16,7 @@ C++ で Lumino をはじめる
 
 ### Lumino をインストールする
 
-1. [Lumino のインストーラ](http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-Windows.msi) をダウンロードし、実行してください。インストーラの指示に従ってインストールを行います。
+1. [Lumino のインストーラ](https://github.com/LuminoEngine/Lumino/releases/download/v0.10.0/Lumino-v0.10.0-Windows.msi) をダウンロードし、実行してください。インストーラの指示に従ってインストールを行います。
 2. 実行時に Windows SmartScreen の注意メッセージが表示された場合は「詳細情報」→「実行」を押してください。
 
 
