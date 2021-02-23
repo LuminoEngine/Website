@@ -4,15 +4,15 @@
 最新リリース (0.10.0)
 ----------
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-Windows.msi" class="button">
+<a href="https://github.com/LuminoEngine/Lumino/releases/download/v0.10.0/Lumino-v0.10.0-Windows.msi" class="button">
   <i class="glyphicon glyphicon-download"></i>C++ (Windows Installer)
 </a>
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-Windows.zip" class="button">
+<a href="https://github.com/LuminoEngine/Lumino/releases/download/v0.10.0/Lumino-v0.10.0-Windows.zip" class="button">
   <i class="glyphicon glyphicon-download"></i>C++ (Windows, ZIP archive)
 </a>
 
-<a href="http://nnmy.sakura.ne.jp/archive/lumino/v0.10.0/Lumino-v0.10.0-HSP3.zip" class="button">
+<a href="https://github.com/LuminoEngine/Lumino/releases/download/v0.10.0/Lumino-v0.10.0-HSP3.zip" class="button">
   <i class="glyphicon glyphicon-download"></i>HSP3 (Windows, ZIP archive)
 </a>
 
