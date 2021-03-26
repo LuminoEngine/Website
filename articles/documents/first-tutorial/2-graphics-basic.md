@@ -15,20 +15,8 @@
 座標を確認するため、`Mouse::position` を使って現在のマウスカーソルの座標を表示してみます。
 
 # [C++](#tab/lang-cpp)
-```cpp
-#include <Lumino.hpp>
+%%Basic/2-Graphics-1.cpp%%
 
-class App : public Application
-{
-    void onUpdate() override
-    {
-        Debug::print(0, String::format(u"X: {0}", Mouse::position().x));
-        Debug::print(0, String::format(u"Y: {0}", Mouse::position().y));
-    }
-};
-
-LUMINO_APP(App);
-```
 # [Ruby](#tab/lang-ruby)
 ```ruby
 require "lumino"

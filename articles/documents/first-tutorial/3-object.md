@@ -15,8 +15,8 @@ class App : public Application
     void onInit() override
     {
         Engine::renderView()->setGuideGridEnabled(true);
-        Engine::camera()->setPosition(5, 5, -5);
-        Engine::camera()->lookAt(0, 0, 0);
+        Engine::mainCamera()->setPosition(5, 5, -5);
+        Engine::mainCamera()->lookAt(0, 0, 0);
 
         auto box1 = BoxMesh::With().buildInto();
         box1->setPosition(1, 0, 0);

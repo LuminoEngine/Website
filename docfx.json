@@ -71,7 +71,7 @@
       "template"  /* local template folder */
       //"templates/material"
     ],
-    "postProcessors": [],
+    "postProcessors": ["ExampleCode"],
     "noLangKeyword": false,
     "keepFileLink": false,
     "cleanupCacheHistory": false,
@@ -80,7 +80,8 @@
       "_appFooter": "Copyright © 2017-2021 lriki",
       "_appLogoPath": "logo.png",
       "_appFaviconPath": "favicon.ico",
-      "_disableContribution": true
+      "_disableContribution": true,
+      "Lumino.ExamplesDir": "C:/Proj/LN/Lumino/examples"
     }
   }
 }
